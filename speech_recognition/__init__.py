@@ -1698,9 +1698,9 @@ class Recognizer(AudioSource):
         rec = KaldiRecognizer(self.vosk_model, 16000);
         
         rec.AcceptWaveform(audio_data.get_raw_data(convert_rate=16000, convert_width=2));
-        finalRecognition = rec.FinalResult()
+        finalRecognition = json.loads(rec.FinalResult())
         
-        return finalRecognition
+        return finalRecognition['text']
 
 def get_flac_converter():
     """Returns the absolute path of a FLAC converter executable, or raises an OSError if none can be found."""
